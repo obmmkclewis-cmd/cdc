@@ -1,0 +1,63 @@
+# MySQL CDC ODS 同步到 ClickHouse
+# 启动示例: flink run -c io.github.collin.cdc.mysql.cdc.ods.App clickhouse/application-biz-clickhouse.yaml
+
+env: TEST
+application: ods_b777
+startupMode: INITIAL
+parallelism:
+  execution: 4
+  write: 1
+checkpoint:
+  checkpointInterval: 10000
+  minPauseBetweenCheckpoints: 10000
+  checkpointTimeout: 180000
+
+# Redis（支持 addr 或 host+port，支持 db）
+redis:
+  addr: localhost:16379
+  password: "password"
+  db: 2
+  # 可选：dial_timeout, read_timeout, write_timeout 等由客户端默认处理
+
+# ClickHouse
+sinkType: CLICKHOUSE
+openCleanTable: false
+clickhouse:
+  host: 127.0.0.1
+  port: 8123
+  native_port: 9000
+  user: root
+  password: "InviteCode@0@2025"
+  database: default
+  cluster: ""
+  max_idle_conns: 10
+  max_open_conns: 100
+  conn_max_lifetime: 1h
+  dial_timeout: 5s
+  read_timeout: 300s
+  write_timeout: 300s
+  compression: false
+
+# RocketMQ（如需增量发 MQ 可在此配置，当前 ODS 写 ClickHouse 不依赖 MQ）
+rocketmq:
+  name_servers:
+    - "13.212.218.160:9876"
+  access_key: "RocketMQ"
+  secret_key: "rocketmq2025"
+
+targetTimeZone: +08:00
+
+# MySQL 数据源（对应 mysql_b777）
+datasources:
+  mysql_b777:
+    host: wgvpn
+    port: 53911
+    username: db_b777_ro
+    password: "D=j1Wob*7RVtfHK4"
+    timeZone: UTC
+    startServerId: 7000
+    details:
+      # db_b777 库：type 1=全表，2=指定表，3=排除指定表
+      db_b777:
+        type: 2
+        tables: [withdraws]

@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="MysqlCdcTest (Flink)" type="JUnit" factoryName="JUnit">
+    <module name="mysql-cdc-ods" />
+    <option name="VM_PARAMETERS" value="--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.invoke=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED" />
+    <option name="PACKAGE_NAME" value="io.github.collin.cdc.mysql.cdc.ods.test" />
+    <option name="MAIN_CLASS_NAME" value="io.github.collin.cdc.mysql.cdc.ods.test.MysqlCdcTest" />
+    <option name="METHOD_NAME" value="testFixCLICKData" />
+    <option name="TEST_OBJECT" value="method" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

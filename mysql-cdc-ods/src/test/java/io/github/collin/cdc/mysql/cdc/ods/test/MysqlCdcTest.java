@@ -22,4 +22,10 @@ public class MysqlCdcTest {
         CdcUtil.createMySQLSyncDatabase(new String[]{"starrocks/dev/fix/application-business.yaml"});
     }
 
+
+    @Test
+    public void testFixCLICKData() throws Exception {
+        CdcUtil.createMySQLSyncDatabase(new String[]{"clickhouse/application-biz-clickhouse.yaml"});
+    }
+
 }

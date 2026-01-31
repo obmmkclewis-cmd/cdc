@@ -21,10 +21,20 @@ public class RedisAdapter {
         Config config = new Config();
         config.setCodec(new StringCodec());
         SingleServerConfig singleServerConfig = config.useSingleServer();
-        singleServerConfig.setAddress(String.format("redis://%s:%s", redisProperties.getHost(), redisProperties.getPort()))
-                .setDatabase(redisProperties.getDatabase());
-        if (redisProperties.getPassword() != null) {
-            singleServerConfig.setPassword(redisProperties.getPassword());
+        String address;
+        if (redisProperties.getAddr() != null && !redisProperties.getAddr().isEmpty()) {
+            address = redisProperties.getAddr().startsWith("redis://") ? redisProperties.getAddr() : "redis://" + redisProperties.getAddr();
+        } else {
+            address = String.format("redis://%s:%s", redisProperties.getHost(), redisProperties.getPort());
+        }
+        int dbIndex = redisProperties.getDb() != 0 ? redisProperties.getDb() : redisProperties.getDatabase();
+        singleServerConfig.setAddress(address)
+                .setDatabase(dbIndex);
+        // Only send AUTH when password is non-null and non-empty.
+        // Empty password means no auth (for Redis instances without requirepass).
+        String pwd = redisProperties.getPassword();
+        if (pwd != null && !pwd.isEmpty()) {
+            singleServerConfig.setPassword(pwd);
         }
 
         this.redissonClient = Redisson.create(config);

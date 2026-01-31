@@ -14,6 +14,7 @@ import io.github.collin.cdc.mysql.cdc.ods.cdc.AbstractMysqlCdcHandler;
 import io.github.collin.cdc.mysql.cdc.ods.enums.MysqlType2IcebergMapping;
 import io.github.collin.cdc.mysql.cdc.ods.enums.SinkType;
 import io.github.collin.cdc.mysql.cdc.ods.properties.AbstractOdsProperties;
+import io.github.collin.cdc.mysql.cdc.ods.properties.ClickHouseOdsProperties;
 import io.github.collin.cdc.mysql.cdc.ods.properties.IcebergOdsProperties;
 import io.github.collin.cdc.mysql.cdc.ods.properties.SinkTypeProperties;
 import io.github.collin.cdc.mysql.cdc.ods.properties.StarRocksOdsProperties;
@@ -65,6 +66,9 @@ public class CdcUtil {
         if (SinkType.STARROCKS.toString().equals(sinkType)) {
             className = "io.github.collin.cdc.mysql.cdc.ods.cdc.Mysql2StarRocksOdsHandler";
             odsProperties = YamlUtil.readYaml(yamlPath, StarRocksOdsProperties.class);
+        } else if (SinkType.CLICKHOUSE.toString().equals(sinkType)) {
+            className = "io.github.collin.cdc.mysql.cdc.ods.cdc.Mysql2ClickHouseOdsHandler";
+            odsProperties = YamlUtil.readYaml(yamlPath, ClickHouseOdsProperties.class);
         } else {
             className = "io.github.collin.cdc.mysql.cdc.ods.cdc.Mysql2IcebergOdsHandler";
             odsProperties = YamlUtil.readYaml(yamlPath, IcebergOdsProperties.class);

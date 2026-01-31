@@ -44,6 +44,7 @@
         <trino>418</trino>
         <reflections>0.10.2</reflections>
         <flink-sql-connector-kafka>3.0.0-1.17</flink-sql-connector-kafka>
+        <clickhouse-jdbc>0.4.0</clickhouse-jdbc>
         <scope>provided</scope>
     </properties>
 
@@ -326,6 +327,12 @@
                 <artifactId>flink-sql-connector-kafka</artifactId>
                 <version>${flink-sql-connector-kafka}</version>
                 <scope>${scope}</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.clickhouse</groupId>
+                <artifactId>clickhouse-jdbc</artifactId>
+                <version>${clickhouse-jdbc}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

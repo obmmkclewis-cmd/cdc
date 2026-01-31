@@ -9,6 +9,10 @@ public enum SinkType {
     /**
      * starrocks
      */
-    STARROCKS
+    STARROCKS,
+    /**
+     * clickhouse
+     */
+    CLICKHOUSE
 
 }

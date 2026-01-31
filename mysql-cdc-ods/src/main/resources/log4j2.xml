@@ -5,9 +5,9 @@
     packages：以逗号隔开的包名列表，用于搜索插件，比如自定义filter、appender等。插件仅会加载一次，所以要想修改后生效必须重启项目
 -->
 <Configuration status="WARN" monitorInterval="600">
-	<!-- 变量配置 -->
+	<!-- 变量配置：生产可设置 -Dcdc.log.dir=/data/logs，未设置时使用临时目录便于本地/测试运行 -->
 	<Properties>
-		<Property name="log_path">/data/logs</Property>
+		<Property name="log_path">${sys:cdc.log.dir:-${sys:java.io.tmpdir}/cdc-logs}</Property>
 		<Property name="log_format">[%-5level][%date{MM-dd HH:mm:ss.SSS}][%thread] (%F:%line)[%method] -> %m%n</Property>
 	</Properties>
 
